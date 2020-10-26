@@ -1,0 +1,19 @@
+*{padding:0;margin:0}
+.lxsm {width:80%;margin:40px auto}
+.lxsm button{padding:5px;border-radius:2px}
+.lxsm .lxsmTool{text-align:right}
+.lxsm .lxsmPagination{display:flex;justify-content:space-between}
+.lxsm .lxsmPagination .lxsmPaginationActive{background:#6DAEE7}
+
+/*table*/
+.lxsm .lxsmTable{border-collapse:collapse;width:100%;margin:10px 0;text-align:center;}
+.lxsm .lxsmTable td,th{padding:20px}
+
+
+/*thead*/
+.lxsm .lxsmTable thead{font-size:25px}
+
+
+/*tbody*/
+.lxsm .lxsmTable tbody .lxsmOperation{color:#6DAEE7;margin:0 5px;cursor:pointer}
+.lxsm .lxsmTable tbody .lxsmNoTable{text-align: center;}

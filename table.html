@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>table</title>
+		<link type="text/css" href="lxsm-table.css" rel="stylesheet">
+		<script type="text/javascript" src="lxsm-table.js"></script> 
+		
+		<style>	
+		</style>	
+		
+	</head>
+	<body>
+		<div>
+			<input type="text" id="search" >ID查询
+			
+		</div>
+		<div id="table">
+			
+		</div>
+		
+		<!--<div class="lxsm">
+			<div class="lxsmTool">
+				<button>刷新</button>
+			</div>
+			<table border="1" class="lxsmTable" >
+				<thead>
+				<tr>
+				<th></th>
+				<th>Month</th>
+				<th>Savings</th>
+				<th>操作</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr onclick="getradio(event)">
+				<td><input type="radio" name="check" onclick="clickSpan(event)"></td>
+				<td><input type="checkbox" name="check" ></td>
+				<td >January</td>
+				<td>$100</td>
+				<td><span class="lxsmOperation">删除</span><span class="lxsmOperation">修改</span><span class="lxsmOperation">查看</span></td>
+				</tr>
+				<tr onclick="getradio(event)">
+				<td><input type="radio" name="check" onclick="clickSpan(event)"></td>
+				<td><input type="checkbox" name="check"></td>
+				<td>February</td>
+				<td>$80</td>
+				<td><span class="lxsmOperation">删除</span><span class="lxsmOperation">修改</span><span class="lxsmOperation">查看</span></td>
+				</tr>
+				<tr onclick="getradio(event)">
+				<td><input type="radio" name="check" onclick="clickSpan(event)"></td>
+				<td><input type="checkbox" name="check" ></td>
+				<td>February</td>
+				<td>$80</td>
+				<td><span class="lxsmOperation">删除</span><span class="lxsmOperation">修改</span><span class="lxsmOperation">查看</span></td>
+				</tr>
+				</tbody>
+				<tfoot>
+				<tr>
+				</tr>
+				</tfoot>
+				
+			</table> 
+			<div class="lxsmPagination">
+				<div>
+					每页显示
+					<select>
+						<option>5</option>
+						<option>15</option>
+						<option>25</option>
+						<option>35</option>
+					</select>
+					条记录，	共 3 条记录
+				</div>
+				<div>
+					<button>首页</button>
+					<button>上一页</button>
+					<button class="lxsmPaginationActive">1</button>
+					<button>2</button>
+					<button>3</button>
+					<button>下一页</button>
+					<button>尾页</button>
+				</div>
+			</div>
+	   </div>-->
+
+		<script type="text/javascript">
+		let table = new lxsmTable({
+			"tableWrapper":"table",
+			"background":"#ffffff",//背景颜色
+			"clickColor":"#F0F0F0",//选中行颜色
+			"url":"http://192.168.7.16:3000/plug/getTable",//请求 url
+			"pageNumber":1,//请求 url
+			"pageSize":5,//请求 url
+			"columns": [{
+						radio : true,//checkbox:true
+						title:"选框",
+			        },{
+			            fieId: 'logId',
+			            title: 'ID',
+						hidden:true
+					},{
+						fieId: 'result',
+						title: '登陆状态',
+			        }, {
+			            fieId: 'time',
+			            title: '登陆时间',
+			            handler: function(time){
+							let newTime = lxsmCommon.convertDate(time)
+							return newTime
+						}
+			        },{
+						operation: true,
+						title: '操作',
+					}],
+			"operation":[
+				{
+					title:"查看",
+					handler:function(id){
+						let data = table.getSelectedItemId(id)
+						console.log(data)
+					}
+				}
+			],
+			"tool":[
+				{
+					title:"获取",
+					handler:function(){
+						let data = table.getSelectedItems()
+						console.log(data)
+					}
+				}
+			],
+		})
+		function getId(id){return document.getElementById(id)}
+		getId("search").oninput=function(){
+			let queryParams={
+				"logId":this.value
+			}
+			table.init(queryParams)
+		}
+		</script> 
+	</body>
+</html>
